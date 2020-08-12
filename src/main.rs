@@ -22,8 +22,6 @@ async fn main() {
 }
 
 async fn start() {
-
-    println!("COMES HERE");
     let ca_path = env::var("VI_BROKER_CA_PATH").unwrap();
     let client_cert = env::var("VI_CLIENT_CERT_PATH").unwrap();
     let client_key = env::var("VI_CLIENT_PRIVATE_KEY_PATH").unwrap();
@@ -88,7 +86,7 @@ async fn start() {
 
 async fn requests(topic: String, count: usize, requests_tx: Sender<Request>, qos: QoS) {
     for i in 0..count {
-        let mut payload = generate_payload(500);
+        let mut payload = generate_payload(5000);
         payload[0] = (i % 255) as u8;
         let publish = rumqttc::Publish::new(&topic, qos, payload);
         let publish = Request::Publish(publish);

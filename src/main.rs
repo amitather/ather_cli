@@ -55,7 +55,7 @@ async fn start() {
         let res = match eventloop.poll().await {
             Ok(v) => v,
             Err(e) => {
-                error!("connection error = {:?}", e);
+                println!("connection error = {:?}", e);
                 continue;
             }
         };
